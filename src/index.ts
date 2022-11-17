@@ -39,3 +39,5 @@ export default function main(): void {
         await insertData(data);
     }, 10000);
 }
+
+main();
