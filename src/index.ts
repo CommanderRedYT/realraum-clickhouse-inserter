@@ -33,11 +33,11 @@ export async function insertData(data: object): Promise<void> {
 }
 
 export default function main(): void {
-    // execute every 10 seconds
+    // execute every 1 seconds
     setInterval(async () => {
         const data = await getData();
         await insertData(data);
-    }, 10000);
+    }, 1000);
 }
 
 main();
