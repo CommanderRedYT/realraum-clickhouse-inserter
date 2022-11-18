@@ -1,4 +1,8 @@
-CREATE TABLE IF NOT EXISTS realraum
+CREATE DATABASE realraum;
+
+DROP TABLE realraum.stats;
+
+CREATE TABLE IF NOT EXISTS realraum.stats
 (
     timestamp DateTime64(6) MATERIALIZED now() CODEC(DoubleDelta, LZ4),
     json String CODEC(ZSTD(1)),
@@ -6,13 +10,14 @@ CREATE TABLE IF NOT EXISTS realraum
     api String MATERIALIZED JSONExtractString(json, 'api'),
 
     state_open boolean MATERIALIZED JSONExtractBool(JSONExtractRaw(json, 'state'), 'open'),
-    state_lastchange DateTime64(6) MATERIALIZED toDateTime(JSONExtractInt(JSONExtractRaw(json, 'state'), 'lastchange'), 'UTC'),
+    state_lastchange DateTime64(6) MATERIALIZED toDateTime(JSONExtractInt(JSONExtractRaw(json, 'state'), 'lastchange'), 'Europe/Vienna'),
 
     door_locked Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'door_locked'),
+    door_contact Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'ext_door_ajar'),
     temperature Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'temperature'),
     humidity Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'humidity'),
 
-    total_member_count UInt64 MATERIALIZED JSONExtractUInt(JSONExtractRaw(JSONExtractRaw(json, 'sensors'), 'total_member_count')[0], 'value')
+    total_member_count UInt64 MATERIALIZED JSONExtractUInt(JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'total_member_count')[1], 'value')
 )
 ENGINE = MergeTree
 PARTITION BY toYYYYMM(timestamp)
