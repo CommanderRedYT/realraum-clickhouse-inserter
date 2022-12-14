@@ -38,6 +38,8 @@ export default function main(): void {
         const data = await getData();
         await insertData(data);
     }, 1000);
+
+    console.log('Started realraum inserter');
 }
 
 main();
