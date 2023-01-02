@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS realraum.stats
     door_contact Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'ext_door_ajar'),
     temperature Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'temperature'),
     humidity Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'humidity'),
+    illumination Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'ext_illumination'),
+    voltage Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'ext_voltage'),
+    barometer Array(String) MATERIALIZED JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'barometer'),
 
     total_member_count UInt64 MATERIALIZED JSONExtractUInt(JSONExtractArrayRaw(JSONExtractRaw(json, 'sensors'), 'total_member_count')[1], 'value')
 )
