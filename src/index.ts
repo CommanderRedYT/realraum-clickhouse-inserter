@@ -33,11 +33,11 @@ export async function insertData(data: object): Promise<void> {
 }
 
 export default function main(): void {
-    // execute every 1 seconds
+    // execute every 5 seconds
     setInterval(async () => {
         const data = await getData();
         await insertData(data);
-    }, 1000);
+    }, 5000);
 
     console.log('Started realraum inserter');
 }
