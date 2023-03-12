@@ -50,7 +50,7 @@ export default function main(): void {
             lastIsOpen = data.open;
 
             const message = {
-                message: `Realraum is ${data.open ? 'open' : 'closed'} now`,
+                message: `Realraum is ${data.open ? 'open' : 'closed'} now (time is ${new Date().toLocaleTimeString("de-AT")})`,
                 title: 'Realraum',
                 device: 'Samsung-S21',
                 priority: 1,
