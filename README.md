@@ -1,3 +1,7 @@
+# DEPRECATED
+
+See [here](https://github.com/CommanderRedYT/r3-statistics.git)
+
 # realraum-clickhouse-inserter
 A clickhouse inserter written in NodeJS to log realraum status.
 
